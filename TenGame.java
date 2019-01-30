@@ -1,4 +1,4 @@
-package get10;
+package tendroid.model;
 
 import java.util.Scanner;
 
@@ -40,7 +40,7 @@ public class TenGame extends TenGrid{
 		if (choix == 3)
 			group = null;
 		if (choix == 2)
-			getSelectedGroup();
+			group = getSelectedGroup();
 		collapseGroup(p);
 		pack();
 		

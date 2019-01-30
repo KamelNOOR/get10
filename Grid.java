@@ -1,4 +1,4 @@
-package get10;
+package tendroid.model;
 
 public class Grid {
 	
@@ -49,12 +49,12 @@ public class Grid {
 		PositionList listePos = new PositionList();
 		if (p.getCol() > 0)
 			listePos.add(new Position(p.getLig(), p.getCol() - 1));
-		if (p.getCol() < nbCol() - 2)
+		if (p.getCol() < nbCol() - 1)
 			listePos.add(new Position(p.getLig(), p.getCol() + 1));
 		if (p.getLig() > 0)
-			listePos.add(new Position(p.getLig() - 1, p.getCol() - 1));
-		if (p.getLig() < nbLig() - 2)
-			listePos.add(new Position(p.getLig(), p.getCol() + 1));
+			listePos.add(new Position(p.getLig() - 1, p.getCol()));
+		if (p.getLig() < nbLig() - 1)
+			listePos.add(new Position(p.getLig() + 1, p.getCol()));
 		return listePos;
 	}
 }

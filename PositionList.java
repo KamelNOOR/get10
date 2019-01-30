@@ -1,10 +1,9 @@
-package get10;
+package tendroid.model;
 
 import java.util.ArrayList;
 
 public class PositionList extends ArrayList<Position>{
 	
-	private ArrayList<Position> listPos;
 	
 	public PositionList() {		
 		super();		
@@ -12,14 +11,14 @@ public class PositionList extends ArrayList<Position>{
 	
 	public boolean add(int col, int lig) {
 		try {
-			listPos.add(new Position(col, lig));
+			add(new Position(col, lig));
 			return true;
 		}catch(Exception e) {return false;}
 	}
 	
 	public boolean contains(Position p) {
-		for (int i = 0; i < listPos.size(); i++) {
-			if ((listPos.get(i)).equals(p))
+		for (int i = 0; i < size(); i++) {
+			if ((get(i)).equals(p))
 				return true;
 		}
 		return false;

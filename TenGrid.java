@@ -1,4 +1,4 @@
-package get10;
+package tendroid.model;
 
 public class TenGrid extends Grid{
 	
@@ -13,13 +13,39 @@ public class TenGrid extends Grid{
 		
 		for (int y = 0; y < nbLig(); y++) {
 			for (int x = 0; x < nbCol(); x++) {
-				set(new Position(y,x),ns[k]);
+				set(new Position(x,y),ns[k]);
 				k++;
 			}	
 		}
 	}
 	
 	public PositionList getGroup(Position p) {
+		
+		PositionList group = new PositionList();
+		
+		return getSubGroup(p, group);
+	}
+	
+	public PositionList getSubGroup(Position p, PositionList group) {
+		
+		PositionList tmp;
+		PositionList eqadj;
+		
+		tmp = adjPositions(p);
+		eqadj = new PositionList();
+		for (int i = 0; i < tmp.size(); i++) {
+			if (get(tmp.get(i)) == get(p))
+				eqadj.add(tmp.get(i));
+		}
+		if (eqadj.size() > 0 && !(group.contains(p))) {
+			group.add(p);
+			for (int j = 0; j < eqadj.size(); j++)
+				group = getSubGroup(eqadj.get(j), group);
+		}
+		return group;
+	}
+	
+/*	public PositionList getGroup(Position p) {
 		
 		PositionList listPosAdj = adjPositions(p);
 		PositionList group = new PositionList();
@@ -57,7 +83,7 @@ public class TenGrid extends Grid{
 		}
 		return group;
 	}
-	
+	*/
 	public void collapseGroup(Position p) {
 		
 		PositionList group = getGroup(p);
@@ -73,12 +99,15 @@ public class TenGrid extends Grid{
 		
 		for(int i=0; i<nbCol();i++) {
 			for(int j=0; j<nbLig();j++) {
-				if (get(new Position(i,j))==null) {
-					for(int k=j; k<nbLig();k++) {
+				if (get(new Position(i,j)) == null) {
+					for(int k=j; k > 0;k--) {
+						set(new Position(i, k), get(new Position(i, k - 1)));
+						unset(new Position(i, k - 1));
+						/*
 						if (get(new Position(i,k))!=null) {
 							set(new Position(i,j),get(new Position(i,k)));
 							unset(new Position(i,k));
-						}
+					}*/
 					}
 				}
 			}
@@ -89,15 +118,15 @@ public class TenGrid extends Grid{
 		
 		PositionList emptyList = emptyPosition();
 		
-		for(int i=0; i<ns.length;i++) {
-			ns[i] = get(emptyList.get(i));
-		}
+		for(int i=0; i<ns.length;i++)
+			set(emptyList.get(i), ns[i]);
 	}
 	
 	public PositionList emptyPosition() {
 		
 		PositionList emptyList = new PositionList();
 		PositionList allPosition = allPosition();
+		
 		for(int i=0; i<allPosition.size(); i++) {
 			if (get(allPosition.get(i)) == null)
 				emptyList.add(allPosition.get(i));

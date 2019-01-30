@@ -1,4 +1,4 @@
-package get10;
+package tendroid.model;
 
 public class Position {
 	
