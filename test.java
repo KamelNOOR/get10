@@ -84,5 +84,6 @@ public class test {
 				System.out.print(tGrid.get(new Position(u, y)));
 			System.out.print("\n");
 		}
+		System.out.println("ZBOUB\n");
 	}
 }
