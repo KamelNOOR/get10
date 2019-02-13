@@ -4,10 +4,14 @@ import java.util.ArrayList;
 
 public class PositionList extends ArrayList<Position>{
 	
-	
 	public PositionList() {		
 		super();		
 	}
+	
+	/*
+	** add() extends the eponym method from ArrayList, returning a boolean. Here, add() returns true when
+	** it successfully added the given position in the PositionList, false otherwise.
+	*/
 	
 	public boolean add(int col, int lig) {
 		try {

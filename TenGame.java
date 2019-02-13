@@ -2,7 +2,7 @@ package tendroid.model;
 
 public class TenGame extends TenGrid{
 	
-	private PositionList currentGroup;
+	private PositionList selectedGroup;
 	
 	public TenGame() { super(); }
 	
@@ -10,19 +10,17 @@ public class TenGame extends TenGrid{
 	
 	public PositionList getSelectedGroup() {
 		
-		return (currentGroup);
+		return (selectedGroup);
 	}
 	
 	public void transition(Position p) {
-			if(currentGroup == null) 
-				currentGroup = getGroup(p);
-			else if(currentGroup.contains(p)) {
+			if(selectedGroup != null && selectedGroup.contains(p)) {
 				collapseGroup(p);
 				pack();
-				currentGroup = null;
+				selectedGroup = null;
 			}
 			else {
-				currentGroup = getGroup(p);
+				selectedGroup = getGroup(p);
 			}
 				
 	}

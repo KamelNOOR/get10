@@ -17,6 +17,6 @@ public class Position {
 	public boolean equals(Position p) {
 		return (p.getCol() == col && p.getLig() == lig);
 	}
-	
+
 	
 }
